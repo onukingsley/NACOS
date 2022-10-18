@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename ="css/Admin.css") }}">
+    <title>Student dashboard</title>
+</head>
+<body>
+    <div class="side-menu">
+        <div class="brand-name">
+        <h1>NACOS</h1>
+    </div>
+    
+    <ul>
+        
+        <li style="padding: 20px;"><a>Student payment history</a></li>
+        <li style="padding: 20px;"><a href="{{ url_for('logout') }}">Logout</a></li>
+        <li style="padding: 20px;"><a>Change Password</a></li>
+        
+    </ul>
+</div>
+
+<div class="container">
+    <div class="header">
+        <div class="nav">
+            <h1>Welcome, {{ current_user.name }} {{current_user.reg_no}}</h1>
+        </div>
+
+    </div>
+    <div class="content">
+        <!-- <div class="cards">
+            <div class="carrd">
+                <div class="box">
+                    <h1>Name:Onyinye Isicheli</h1>
+                    <h3>Reg No: 2017/245</h3>
+
+                </div>
+
+
+            </div>
+            
+
+        </div> -->
+        <div class="content-3" style="margin-top: 100px;">
+            <div class="history">
+                <div class="title">
+                    <h2>Student Payment History</h2>
+                    
+
+                </div>
+                <table>
+                    <tr>
+                        <th>Level</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Option</th>
+                       
+                    </tr>
+                    {% for payment in detail %}
+                         <tr>
+                        <td>{{payment.reg_no}}</td>
+                        <td>{{payment.status}}</td>
+                        <td>{{payment.Date}}</td>
+                        <td><a href="#" class="btnn">Print Receipt</a></td>
+
+                    </tr>
+                    {% endfor %}
+
+
+
+                  
+                </table>
+                
+            </div>
+            
+
+        </div>
+
+    </div>
+
+</div>
+    
+</body>
+</html>

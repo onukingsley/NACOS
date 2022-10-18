@@ -1,0 +1,314 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+
+}
+.banner{
+    width: 100%;
+    height: 100vh;
+    background-image:url(../images/background.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.content{
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    
+}
+.content h1{
+    font-size: 100px;
+    margin-top: 80px;
+    color: aqua;
+}
+.content p{
+    margin: 20px auto;
+    font-weight: bold;
+    line-height: 25px;
+    color: whitesmoke;
+}
+.banner button {
+    width: 200px;
+    padding: 10px 10px;
+    text-align: center;
+    margin: 20px 10px;
+    border-radius: 20px;
+    font-weight: bolder;
+    border: 2px solid aqua;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+.banner button a{
+    color: #fff;
+    text-decoration: none;
+}
+span{
+    background: aqua;
+    height: 100%;
+    width: 0;
+    border-radius: 25px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: 0.5s;
+
+
+}
+button:hover span{
+    width: 100%;
+
+}
+button:hover{
+    border: none;
+
+}
+.login-form{
+    width: 100%;
+    top: 50%;
+    height:100vh;
+    background-image:url(../images/contact-bg.jpg);
+    background-size: cover;
+    background-position: center;
+    transform: translateY(-50%);
+    position: absolute;
+    text-align: center;
+}
+.login-form h1{
+    font-size: 70px;
+    margin: 40px 0;
+    /*margin-top: 80px;*/
+    color: aqua;
+    /*text-align: center;*/
+}
+.login-form form{
+    width: 100%;
+   /* position: absolute;
+    top: 50%;
+   /* transform: translateY(-50%);
+    text-align: center;*/
+
+}
+.login-form p{
+    margin: 20px auto;
+    font-weight: bold;
+    line-height: 25px;
+    color: whitesmoke;
+    font-size: medium;
+}
+
+.login-form input{
+    font-size: 16px;
+    width: 200px;
+    padding: 15px 10px;
+    border: 0;
+    outline: aqua;
+    border-radius: 5px;
+    text-align: center;
+}
+.login-form button{
+    width: 200px;
+    padding: 10px 10px;
+    text-align: center;
+    margin: 20px 10px;
+    border-radius: 10px;
+    font-weight: bolder;
+    border: 2px solid aqua;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+.login-form button span{
+    background: aqua;
+    height: 100%;
+    width: 0;
+    border-radius: 25px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: 0.5s;
+
+
+}
+.login-form button:hover span{
+    width: 100%;
+
+}
+.login-form button:hover{
+    border: none;
+
+
+}
+.login-form button a{
+    color: #fff;
+    text-decoration: none;
+}
+
+
+.main_box{
+    width: 100%;
+    height: 100vh;
+    background-image:url(../images/contact-bg.jpg);
+    background-size: cover;
+    background-position: center;
+}
+.main_box .sidebar_menu{
+    position: fixed;
+    height: 100vh;
+    width: 280px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+}
+.sidebar_menu .logo{
+    position: absolute;
+    width: 100%;
+    height: 60px;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+
+}
+.sidebar_menu .logo a{
+    color: aqua;
+    font-size: 25px;
+    font-weight: 500;
+    position: absolute;
+    left: 50px;
+    line-height: 60px;
+    text-decoration: none;
+}
+.sidebar_menu .menu{
+    position: absolute;
+    top: 80px;
+    width: 100%;
+}
+.sidebar_menu .menu li{
+    margin-top: 6px;
+    padding: 14px 20px;
+    transition: all 0.3s linear;
+}
+.sidebar_menu .menu a{
+    color: whitesmoke;
+    font-size: 20px;
+    text-decoration: none;
+}
+.sidebar_menu .menu li:hover{
+border-left: 2px solid aqua;
+box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+}
+.main{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    text-align: center;
+    
+}
+section {
+    margin-left: 300px;
+    min-height: 100vh;
+  }
+   section h2 {
+    text-align: right;
+    padding-right: 50px;
+    padding-top: 20px;
+    color: aqua;
+    font-weight: bold;
+  }
+  
+  table {
+    width: 1000px;
+    margin: 50px auto;
+    background-color: white;
+    color: aqua;
+    text-align: center;
+    border-spacing: 20px;
+    border-collapse: collapse;
+    font-weight: bold;
+    font-size: 20px;
+    
+  }
+  
+  thead th{
+    font-weight: 800;
+    background-color: whitesmoke;
+    color: black;
+    text-align: center;
+  }
+  
+  tr,
+  td {
+    border: 1px solid white;
+  }
+  tbody tr:nth-child(even){
+	background-color:grey;
+
+}
+ section th td{
+    padding: 15px;
+}
+section tbody td button{
+    width: 150px;
+    padding: 5px;
+    text-align: center;
+    margin: 20px 10px;
+    border-radius: 10px;
+    font-weight: bolder;
+    border: 2px solid aqua;
+    background: whitesmoke;
+    color: black;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    display: inline;
+}
+section tbody td button:hover{
+    background-color: aqua;
+}
+.tick-mark{
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: 2%;
+    box-shadow: inset 0 0 12px lavenderblush;
+    padding: 10px;
+}
+.tick-mark::before{
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: 50%;
+    width: 8px;
+    border-radius: 2px;
+    background-color: aqua;
+    content: "";
+    transform: translateX(12px) rotate(-45deg);
+    transform-origin: left bottom;
+    z-index: +1;
+}
+.tick-mark::after{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 8px;
+    width: 100%;
+    background-color: aqua;
+    content: "";
+    transform: translateX(12px) rotate(-45deg);
+    transform-origin: left bottom;
+}
+#email_error , #pass_error{
+    color: #c62828;
+    font-size: 18px;
+    margin-top: 5px;
+    text-align: center;
+    display: none;
+}

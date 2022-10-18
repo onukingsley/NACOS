@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Authcss/bootstrap.css') }}">
+
+    <title>Staff dashboard</title>
+</head>
+<body>
+    <div class="side-menu">
+        <div class="brand-name">
+        <h1>NACOS</h1>
+    </div>
+    
+    <ul>
+        
+        <li style="padding: 20px;">Student payment history</li>
+        <li style="padding: 20px;">Logout</li>
+        <li style="padding: 20px;">Change Password</li>
+        
+    </ul>
+</div>
+
+<div class="container">
+    <div class="header">
+        <div class="nav">
+            <h1>Welcome  {{ current_user.name }}</h1>
+        </div>
+
+    </div>
+    <div class="content">
+        <div class="cards">
+            <div class="carrd">
+                <div class="box">
+                    <h1>Name:{{ st.name }}</h1>
+                    <h3>Reg No: {{ st.reg_no }}</h3>
+
+                </div>
+
+
+            </div>
+            
+
+        </div>
+        <div class="content-3">
+            <div class="history">
+                <div class="title">
+                    <h2>Student Payment History</h2>
+                    
+
+                </div>
+                <table>
+
+                    <tr>
+                        <th>Reg_No</th>
+                        <th>Level</th>
+                        <th>Date</th>
+                        <th>Status</th>
+
+                    </tr>
+
+                    {% for student in detail %}
+                         <tr>
+                        <td>{{student.studentid.reg_no}}</td>
+                        <td>{{student.level}}</td>
+                        <td>{{student.Date}}</td>
+                        <td>{{student.status}}</td>
+
+                    </tr>
+                    {% endfor %}
+
+
+
+                  
+                </table>
+                
+            </div>
+            
+
+        </div>
+
+    </div>
+
+</div>
+    
+</body>
+</html>

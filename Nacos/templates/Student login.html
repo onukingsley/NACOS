@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Authcss/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Authcss/bootstrap.css') }}">
+
+
+    <title>Student Login</title>
+</head>
+<body>
+    <div class="login-form">
+        <h1>LOGIN</h1>
+        <form  method="POST">
+        {{ form.hidden_tag() }}
+
+
+                 <p>Email</p>
+            {{ form.username(class ='form-control form-control ', style="font-size: 16px; width: 200px; padding: 15px 10px; border: 0; outline: aqua; border-radius: 5px; text-align: center;") }}
+
+
+            <p>Password</p>
+            {{ form.password(class ='form-control form-control ', style="font-size: 16px; width: 200px; padding: 15px 10px; border: 0; outline: aqua; border-radius: 5px; text-align: center;") }}
+             <p>Password</p>
+
+            {{ form.combo(class ='form-control form-control ', style="font-size: 16px; width: 200px; padding: 15px 10px; border: 0; outline: aqua; border-radius: 5px; text-align: center;") }}
+
+
+            {{ form.login(class = "login", style="width: 200px; padding: 10px 10px; text-align: center; margin: 20px 10px; border-radius: 10px; font-weight: bolder; border: 2px solid aqua; background: transparent; color: #fff; cursor: pointer; position: relative; overflow: hidden;") }}
+
+
+        </form>
+
+    </div>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    
+</body>
+</html>

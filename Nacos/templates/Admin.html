@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Authcss/bootstrap.css') }}">
+
+    <title>Admin</title>
+</head>
+<body>
+    <div class="side-menu">
+        <div class="brand-name">
+        <h1>NACOS</h1>
+    </div>
+    
+    <ul>
+        <a href=""><li>Students</li></a>
+        <a href=""><li>Staff</li></a>
+        <a href="{{ url_for('logout') }}"> <li>logOut</li></a>
+
+
+
+
+        
+    </ul>
+</div>
+
+<div class="container">
+    <div class="header">
+        <div class="nav">
+            <div class="search">
+                <form method="post"> {{ form.hidden_tag() }}
+                {{ form.reg_no }}
+                {{ form.submit }}</form>
+
+
+            </div>
+            <div class="user">
+                <a href="{{ url_for('paymentform') }}" class="btn">Add New</a>
+                <a href="{{ url_for('home') }}" class="btn">Sign up</a>
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="content">
+        <div class="cards">
+            <div class="card">
+                <div class="box">
+                    <h1>{{ total_student }}</h1>
+                    <h3>Students</h3>
+
+                </div>
+
+
+            </div>
+            <div class="card">
+                <div class="box">
+                    <h1>{{ total_staff }}</h1>
+                    <h3>Staff</h3>
+
+                </div>
+                
+
+            </div>
+            <div class="card">
+                <div class="box">
+                    <h1>{{ total_payment }}</h1>
+                    <h3>Payment History</h3>
+
+                </div>
+
+
+            </div>
+
+
+
+
+        </div>
+        <div class="content-2">
+            <div class="recent-payments">
+                <div class="title">
+                    <h2>Recent Payments</h2>
+                    <a href="#" class="btn">View All</a>
+
+                </div>
+                <table>
+                    <thead>
+                        <th>Name</th>
+                        <th>Reg No</th>
+                        <th>Amount</th>
+                        <th>Option</th>
+                    </thead>
+                    {% for recipt in payment  %}
+                         <tr>
+                        <td>{{recipt.studentid.name}}</td>
+                        <td>{{recipt.studentid.reg_no}}</td>
+                        <td>#1700</td>
+                        <td><a href="#" class="btn">View</a></td>
+                    </tr>
+                    {% endfor %}
+
+
+
+                </table>
+                
+            </div>
+            <div class="new-students">
+                <div class="title">
+                    <h2>New Student</h2>
+                    <a href="#" class="btn">View All</a>
+
+                </div>
+                <table>
+                    <thead>
+                        <th>Profile</th>
+                        <th>Name</th>
+                        <th>Option</th>
+                    </thead>
+                    {% for student in students  %}
+                         <tr>
+                        <td>{{student.name}}</td>
+                        <td>{{student.reg_no}}</td>
+                        <td><a href="#" class="btn">View</a></td>
+                    </tr>
+                    {% endfor %}
+
+                </table>
+                
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+    
+</body>
+</html>
