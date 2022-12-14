@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+     <link rel="stylesheet" href="{{ url_for('static', filename='new stylesheet/css/nacos.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='Authcss/bootstrap.css') }}">
 
     <title>Admin</title>
@@ -12,12 +12,12 @@
 <body>
     <div class="side-menu">
         <div class="brand-name">
-        <h1>NACOS</h1>
+        <h1 style="color: #0B275F;">NACOS</h1>
     </div>
     
-    <ul>
-        <a href=""><li>Students</li></a>
-        <a href=""><li>Staff</li></a>
+   <ul>
+        <a href="{{ url_for('viewmore',tablename='Student') }}"><li>Students</li></a>
+        <a href="{{ url_for('viewmore',tablename='Staff') }}"><li>Staff</li></a>
         <a href="{{ url_for('logout') }}"> <li>logOut</li></a>
 
 
@@ -35,11 +35,11 @@
                 {{ form.reg_no (class='input')}}
                 {{ form.submit (class='button',style="height: 50px; background:white; color: #0B275F;width: 60px;border-radius: 10px;" )}}</form>
 
-
             </div>
             <div class="user">
-                <a href="{{ url_for('paymentform') }}" class="btn">Add New</a>
-                <a href="{{ url_for('home') }}" class="btn">Sign up</a>
+                <a href="{{ url_for('paymentform') }}" class="btn">Add payment</a>
+                <a href="{{ url_for('addstaff') }}" class="btn">Add Admin</a>
+                <a href="{{ url_for('addstudent') }}" class="btn">Add student</a>
 
 
             </div>
@@ -51,8 +51,8 @@
         <div class="cards">
             <div class="card">
                 <div class="box">
-                    <h1>{{ total_student }}</h1>
-                    <h3>Students</h3>
+                    <h1 style="color: #0B275F;">{{total_student}}</h1>
+                    <h3  style="color: #0B275F;">Students</h3>
 
                 </div>
 
@@ -60,50 +60,43 @@
             </div>
             <div class="card">
                 <div class="box">
-                    <h1>{{ total_staff }}</h1>
-                    <h3>Staff</h3>
+                    <h1 style="color: #0B275F;">{{total_staff}}</h1>
+                    <h3 style="color: #0B275F;">Staff</h3>
 
                 </div>
                 
 
             </div>
+
+
             <div class="card">
                 <div class="box">
-                    <h1>{{ total_payment }}</h1>
-                    <h3>Payment History</h3>
+                    <h1 style="color: #0B275F;">{{total_payment}}</h1>
+                    <h3 style="color: #0B275F;">payment</h3>
 
                 </div>
-
+                
 
             </div>
-
-
 
 
         </div>
         <div class="content-2">
             <div class="recent-payments">
                 <div class="title">
-                    <h2>Recent Payments</h2>
-                    <a href="#" class="btn">View All</a>
+                    <h2 style="color: #0B275F;">Recent Payments</h2>
+                    <a href="{{ url_for('viewmore',tablename='Payment') }}" class="btnn">View All</a>
 
                 </div>
                 <table>
-                    <thead>
-                        <th>Name</th>
-                        <th>Reg No</th>
-                        <th>Amount</th>
-                        <th>Option</th>
-                    </thead>
-                    {% for recipt in payment  %}
+                    {% for recipt in payment[:10]  %}
                          <tr>
                         <td>{{recipt.studentid.name}}</td>
                         <td>{{recipt.studentid.reg_no}}</td>
                         <td>#1700</td>
-                        <td><a href="#" class="btn">View</a></td>
+                        <td><a href="{{ url_for('studentPaymenttable',reg_no=recipt.studentid.reg_no|replace('/','')) }}" class="btn">View</a></td>
                     </tr>
                     {% endfor %}
-
 
 
                 </table>
@@ -111,23 +104,24 @@
             </div>
             <div class="new-students">
                 <div class="title">
-                    <h2>New Student</h2>
-                    <a href="#" class="btn">View All</a>
+                    <h2 style="color: #0B275F;">New Student</h2>
+                    <a href="{{ url_for('viewmore',tablename='Student') }}" class="btnn">View All</a>
 
                 </div>
                 <table>
-                    <thead>
+                    <tr>
                         <th>Profile</th>
                         <th>Name</th>
                         <th>Option</th>
-                    </thead>
-                    {% for student in students  %}
+                    </tr>
+                    {% for student in students[:10]  %}
                          <tr>
                         <td>{{student.name}}</td>
                         <td>{{student.reg_no}}</td>
-                        <td><a href="#" class="btn">View</a></td>
+                        <td><a href="{{ url_for('studentPaymenttable',reg_no=student.regno|replace('/','')) }}" class="btn">View</a></td>
                     </tr>
                     {% endfor %}
+
 
                 </table>
                 

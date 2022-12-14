@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!-- Created By CodingLab - www.codinglabweb.com -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Login Form | CodingLab</title> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='new stylesheet/css/form.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Authcss/bootstrap.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <div class="title"><span>Admin Form</span></div>
+        <form method="post">
+          <div class="row">
+                    {{ form.hidden_tag() }}
+            {{ form.name(placeholder="Name") }}
+          </div>
+          <div class="row">
+
+            {{ form.reg_no(placeholder="Reg_No") }}
+          </div>
+          <div class="row">
+
+             {{ form.current_level(placeholder="Level") }}
+          </div>
+          <div class="row" style="display: flex; justify-content: space-around">
+              {{ form.combo(placeholder="Status") }}
+              <a href="{{ url_for('admindashboard') }}"><p>Home</p></a>
+
+          </div>
+
+
+
+          <div class="row button">
+            {{ form.submit }}
+          </div>
+
+
+          
+          
+          
+
+        </form>
+      </div>
+    </div>
+
+  </body>
+</html>

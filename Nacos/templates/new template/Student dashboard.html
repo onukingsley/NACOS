@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <link rel="stylesheet" href="{{ url_for('static', filename='new stylesheet/css/nacos.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Authcss/bootstrap.css') }}">
+
+    <title>Student dashboard</title>
+</head>
+<body>
+    <div class="side-menu">
+        <div class="brand-name">
+       <a href="login form.html"> <h1 style="color: #0B275F !important;">NACOS</h1></a>
+    </div>
+    
+    <ul>
+        
+        <li style="padding: 20px; color:white;" class="active">Student payment history</li>
+        <a href="{{ url_for('logout') }}"><li style="padding: 20px;">Logout</li></a>
+        <li style="padding: 20px;">Change Password</li>
+        
+    </ul>
+</div>
+
+<div class="container">
+    <div class="header">
+        <div class="nav">
+            <h1>Welcome, {{user.name}} {{ current_user.regno }}</h1>
+        </div>
+
+    </div>
+    <div class="content">
+        <!-- <div class="cards">
+            <div class="carrd">
+                <div class="box">
+                    <h1>Name:Onyinye Isicheli</h1>
+                    <h3>Reg No: 2017/245</h3>
+
+                </div>
+
+
+            </div>
+            
+
+        </div> -->
+        <div class="content-3">
+            <div class="history" style="margin-top: 50px;">
+                <div class="title">
+                    <h2 style="color: #0B275F !important;">Student Payment History</h2>
+                    
+
+                </div>
+                <table>
+                    <tr>
+                        <th class="white">Level</th>
+                        <th class="white">Status</th>
+                        <th class="white">Date</th>
+                        <th class="white">Option</th>
+                       
+                    </tr>
+                    {% for student in stu %}
+                         <tr>
+                            <td class="white">{{ student.level }}</td>
+                            <td class="white">{{student.status}}</td>
+                            <td class="white">{{ student.Date}}</td>
+                            <td class="white"><a href="#" class="btnn">Print Receipt</a></td>
+
+                        </tr>
+                    {% endfor %}
+
+
+
+                  
+                </table>
+                
+            </div>
+            
+
+        </div>
+
+    </div>
+
+</div>
+    
+</body>
+</html>

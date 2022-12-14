@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{{ url_for('static', filename='new stylesheet/css/nacos.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Authcss/bootstrap.css') }}">
+
+    <title>Staff dashboard 1</title>
+</head>
+<body>
+    <div class="side-menu">
+        <div class="brand-name">
+       <a href="login form.html"> <h1 style="color: #0B275F !important;">NACOS</h1></a>
+    </div>
+    
+      <ul>
+        <a href=""><li style="padding: 20px;">Student payment history</li></a>
+        <a href="{{ url_for("logout") }}"> <li style="padding: 20px;">Logout</li></a>
+{#        <a href=""><li style="padding: 20px;">Change Password</li></a>#}
+    </ul>
+</div>
+
+<div class="container">
+    <div class="header">
+        <div class="nav">
+            <h1>Welcome {{ current_user.name }}</h1>
+        </div>
+
+    </div>
+    <div class="content">
+        <!-- <div class="cards">
+            <div class="carrd">
+                <div class="box">
+                    <h1>Name:Onyinye Isicheli</h1>
+                    <h3>Reg No: 2017/245</h3>
+
+                </div>
+
+
+            </div>
+            
+
+        </div> -->
+        <div class="content-3" style="margin-top: 100px;">
+            <div class="student-detail">
+                <div class="title">
+                    <h2 style="color: #0B275F;">Enter Student Reg No</h2>
+                    
+
+                </div>
+               <form method="post" style="display: flex; justify-content: center; flex-direction: column; align-content: center">
+
+                 {{ form.hidden_tag() }}
+                {{form.reg_no (class='txt',style="text-align: center;",placeholder ='enter student Reg No')}}
+
+               {{ form.submit (class="sub", style="text-align: center;") }}
+                
+                </form>
+            </div>
+            
+
+        </div>
+
+    </div>
+
+</div>
+    
+</body>
+</html>

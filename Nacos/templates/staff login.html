@@ -12,11 +12,11 @@
 </head>
 <body>
     <div class="login-form">
-        <h1>STAFF LOGIN</h1>
+        <h1>SIGN UP</h1>
         <form method="POST" >
             {{ form.hidden_tag() }}
 
-            <p>SCHOOL EMAIL ADDRESS</p>
+            <p>Full Name</p>
             {% if form.fullname.errors %}
                 {% for error in form.fullname.errors %}
                     {{ form.fullname(class ='form-control form-control ', style="font-size: 16px; width: 200px; padding: 15px 10px; border: 0; outline: aqua; border-radius: 5px; text-align: center;") }}
@@ -27,12 +27,21 @@
                    {{ form.fullname(class ='form-control form-control ', style="font-size: 16px; width: 200px; padding: 15px 10px; border: 0; outline: aqua; border-radius: 5px; text-align: center;") }}
             {% endif %}
 
+            <p>E-Mail</p>
+            {% if form.email.errors %}
+                {% for error in form.email.errors %}
+                    {{ form.email(class ='form-control form-control ', style="font-size: 16px; width: 200px; padding: 15px 10px; border: 0; outline: aqua; border-radius: 5px; text-align: center;") }}
+                     <div id="pass_error">please fill in your Full Name</div>
+                {% endfor %}
+
+            {% else %}
+                   {{ form.email(class ='form-control form-control ', style="font-size: 16px; width: 200px; padding: 15px 10px; border: 0; outline: aqua; border-radius: 5px; text-align: center;") }}
+            {% endif %}
 
 
-
-
-
-            <p>Password</p>
+            <div style="display: flex; flex-direction: row; justify-content: center">
+            <div style="margin-right: 20px">
+                <p>Reg No</p>
          {% if form.reg_no.errors %}
                 {% for error in form.reg_no.errors %}
                     {{ form.reg_no(class ='form-control form-control ', style="font-size: 16px; width: 200px; padding: 15px 10px; border: 0; outline: aqua; border-radius: 5px; text-align: center;") }}
@@ -41,9 +50,11 @@
 
             {% else %}
                    {{ form.reg_no(class ='form-control form-control ', style="font-size: 16px; width: 200px; padding: 15px 10px; border: 0; outline: aqua; border-radius: 5px; text-align: center;") }}
-            {% endif %}
+            {% endif %}</div>
+
             <br>
-         <p>current</p>
+            <div>
+                   <p>current</p>
         {% if form.current_level.errors %}
                 {% for error in form.current_level.errors %}
                     {{ form.current_level(class ='form-control form-control ', style="font-size: 16px; width: 200px; padding: 15px 10px; border: 0; outline: aqua; border-radius: 5px; text-align: center;") }}
@@ -53,6 +64,11 @@
             {% else %}
                    {{ form.current_level(class ='form-control form-control ', style="font-size: 16px; width: 200px; padding: 15px 10px; border: 0; outline: aqua; border-radius: 5px; text-align: center;") }}
             {% endif %}
+            </div>
+
+            </div>
+
+
         <br>
 
             {{ form.login(class = "login", style="width: 200px; padding: 10px 10px; text-align: center; margin: 20px 10px; border-radius: 10px; font-weight: bolder; border: 2px solid aqua; background: transparent; color: #fff; cursor: pointer; position: relative; overflow: hidden;") }}
