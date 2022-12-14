@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Authcss/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Authcss/bootstrap.css') }}">
+
+
+    <title>Staff login</title>
+</head>
+<body>
+    <div class="login-form">
+        <h1> STAFF SIGN UP</h1>
+        <form method="POST" >
+            {{ form.hidden_tag() }}
+
+            <p>Full Name</p>
+            {% if form.fullname.errors %}
+                {% for error in form.fullname.errors %}
+                    {{ form.fullname(class ='form-control form-control ', style="font-size: 16px; width: 200px; padding: 15px 10px; border: 0; outline: aqua; border-radius: 5px; text-align: center;") }}
+                     <div id="pass_error">please fill in your Full Name</div>
+                {% endfor %}
+
+            {% else %}
+                   {{ form.fullname(class ='form-control form-control ', style="font-size: 16px; width: 200px; padding: 15px 10px; border: 0; outline: aqua; border-radius: 5px; text-align: center;") }}
+            {% endif %}
+
+            <p>E-Mail</p>
+            {% if form.email.errors %}
+                {% for error in form.email.errors %}
+                    {{ form.email(class ='form-control form-control ', style="font-size: 16px; width: 200px; padding: 15px 10px; border: 0; outline: aqua; border-radius: 5px; text-align: center;") }}
+                     <div id="pass_error">please fill in your Full Name</div>
+                {% endfor %}
+
+            {% else %}
+                   {{ form.email(class ='form-control form-control ', style="font-size: 16px; width: 200px; padding: 15px 10px; border: 0; outline: aqua; border-radius: 5px; text-align: center;") }}
+            {% endif %}
+
+
+            <div style="display: flex; flex-direction: row; justify-content: center">
+            <div style="margin-right: 20px">
+                <p>Password</p>
+         {% if form.password.errors %}
+                {% for error in form.password.errors %}
+                    {{ form.password(class ='form-control form-control ', style="font-size: 16px; width: 200px; padding: 15px 10px; border: 0; outline: aqua; border-radius: 5px; text-align: center;") }}
+                     <div id="pass_error">please fill in your registration number</div>
+                {% endfor %}
+
+            {% else %}
+                   {{ form.password(class ='form-control form-control ', style="font-size: 16px; width: 200px; padding: 15px 10px; border: 0; outline: aqua; border-radius: 5px; text-align: center;") }}
+            {% endif %}</div>
+
+            <br>
+            <div>
+                   <p>Role</p>
+        {% if form.combo.errors %}
+                {% for error in form.combo.errors %}
+                    {{ form.combo(class ='form-control form-control ', style="font-size: 16px; width: 200px; padding: 15px 10px; border: 0; outline: aqua; border-radius: 5px; text-align: center;") }}
+                     <div id="pass_error">please fill in your current level</div>
+                {% endfor %}
+
+            {% else %}
+                   {{ form.combo(class ='form-control form-control ', style="font-size: 16px; width: 200px; padding: 15px 10px; border: 0; outline: aqua; border-radius: 5px; text-align: center;") }}
+            {% endif %}
+            </div>
+
+            </div>
+
+
+        <br>
+
+            {{ form.login(class = "login", style="width: 200px; padding: 10px 10px; text-align: center; margin: 20px 10px; border-radius: 10px; font-weight: bolder; border: 2px solid aqua; background: transparent; color: #fff; cursor: pointer; position: relative; overflow: hidden;") }}
+
+{#            <button type="submit" class="login"><span></span><a href="staff dashboard.html">Login</a></button>#}
+
+        </form>
+
+    </div>
+  ,<script src="jquery/jquery-3.6.0.min.js"></script> 
+  ,<script type="text/javascript" src="js/javascipt.js"></script> 
+</body>
+</html>

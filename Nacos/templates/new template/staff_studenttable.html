@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="{{ url_for('static', filename='new stylesheet/css/nacos.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Authcss/bootstrap.css') }}">
+    <title>Admin</title>
+</head>
+<body>
+    <div class="side-menu">
+        <div class="brand-name">
+        <h1 style="color: #0B275F;">NACOS</h1>
+    </div>
+    
+    <ul>
+        <a href="{{ url_for('viewmore',tablename='Student') }}"> <li>Students</li></a>
+        <a href="{{ url_for('viewmore',tablename='Staff') }}"><li>Staff</li></a>
+        <a href="{{ url_for('viewmore',tablename='Payment') }}"><li>Payment</li></a>
+
+
+    </ul>
+</div>
+
+<div class="container">
+    <div class="header">
+        <div class="nav">
+            <h2>{{tablename|upper}}</h2>
+
+        </div>
+
+    </div>
+    <div class="content">
+        
+        <div class="content-2">
+            <div class="recent-payments">
+                <div class="title">
+                    <h2 style="color: #0B275F;">{{tablename.Title}}</h2>
+                    
+
+                </div>
+                <table>
+
+                        {% if tablename == 'Payment' %}
+
+                            <th>Name</th>
+                        <th>Reg No</th>
+                        <th>Amount</th>
+
+                            {% for var in table %}
+                                 <tr>
+                                <td>{{var.studentid.name}}</td>
+                                <td>{{var.studentid.reg_no}}</td>
+                                <td>#1700</td>
+                                 </tr>
+                            {% endfor %}
+
+
+
+                        {% elif tablename == 'Student' %}
+                        <tr>
+                        <th>Profile</th>
+                        <th>Name</th>
+                        <th>Option</th>
+
+                              {% for var in table %}
+                                 <tr>
+                                <td>{{var.name}}</td>
+                                <td>{{var.reg_no}}</td>
+
+                                  <td><a href="{{ url_for('studentPaymenttable',reg_no= var.reg_no|replace('/','')) }}" class="btn">View</a></td>
+                                 </tr>
+                            {% endfor %}
+                        {% elif tablename == 'Staff' %}
+                            <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                            </tr>
+                                {% for var in table %}
+                                 <tr>
+                                <td>{{var.name}}</td>
+                                <td>{{var.email}}</td>
+                                 </tr>
+                            {% endfor %}
+                        {% endif %}
+
+                </table>
+                
+            </div>
+
+
+        
+        <div class="content-2">
+            
+            
+
+
+
+        </div>
+
+    </div>
+
+</div>
+    
+</body>
+</html>
