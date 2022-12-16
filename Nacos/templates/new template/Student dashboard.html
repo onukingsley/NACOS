@@ -19,7 +19,8 @@
         
         <li style="padding: 20px; color:white;" class="active">Student payment history</li>
         <a href="{{ url_for('logout') }}"><li style="padding: 20px;">Logout</li></a>
-        <li style="padding: 20px;">Change Password</li>
+        <a href="{{ url_for('changepassword') }}"><li style="padding: 20px;">Change Password</li></a>
+
         
     </ul>
 </div>
@@ -28,6 +29,21 @@
     <div class="header">
         <div class="nav">
             <h1>Welcome, {{user.name}} {{ current_user.regno }}</h1>
+                          {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for category, message in messages %}
+        <div id="art" style="background: white; color: #0B275F; padding: 10px; width: auto" class="alert alert-{{ category }} alert-dismissible fade show " role="alert">
+  <strong>{{ message }}</strong>
+  <button id='close' type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
         </div>
 
     </div>
@@ -65,7 +81,8 @@
                             <td class="white">{{ student.level }}</td>
                             <td class="white">{{student.status}}</td>
                             <td class="white">{{ student.Date}}</td>
-                            <td class="white"><a href="#" class="btnn">Print Receipt</a></td>
+
+                        <td><a href="{{ url_for('printdoc',paymentid=student.id) }}" class="btn">Print recipt</a></td>
 
                         </tr>
                     {% endfor %}
@@ -83,6 +100,17 @@
     </div>
 
 </div>
-    
+      <script>
+        var closes= document.getElementById('close')
+        var alertt = document.getElementById('art')
+        closes.onclick= function(){
+
+            alertt.style.display = 'none'
+        }
+        closes.addEventListener(onclick, function () {
+            alert('hey')
+
+        })
+    </script>
 </body>
 </html>

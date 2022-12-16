@@ -33,3 +33,9 @@ class Search(FlaskForm):
     reg_no = StringField('REG_NO', validators=[DataRequired()])
     submit = SubmitField('SUBMIT')
 
+class Changepassword(FlaskForm):
+    password = StringField('PASSWORD',validators=[DataRequired()])
+    new_password = PasswordField('NEW PASSWORD',validators=[DataRequired()])
+
+    submit = SubmitField('SUBMIT')
+

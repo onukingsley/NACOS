@@ -29,6 +29,21 @@
         <div class="nav">
             <h1 style="color: white !important;">{{current_user.name}}</h1>
         </div>
+              {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for category, message in messages %}
+        <div id="art" style="background: white; color: #0B275F; padding: 10px; width: auto" class="alert alert-{{ category }} alert-dismissible fade show " role="alert">
+  <strong>{{ message }}</strong>
+  <button id='close' type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 
     </div>
     <div class="content">
@@ -80,6 +95,17 @@
     </div>
 
 </div>
-    
+      <script>
+        var closes= document.getElementById('close')
+        var alertt = document.getElementById('art')
+        closes.onclick= function(){
+
+            alertt.style.display = 'none'
+        }
+        closes.addEventListener(onclick, function () {
+            alert('hey')
+
+        })
+    </script>
 </body>
 </html>

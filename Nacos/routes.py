@@ -1,19 +1,28 @@
 from flask import  render_template, redirect, flash, get_flashed_messages, request, url_for
 from Nacos import app ,db
-from Nacos.forms import StudentRegistration,Signin,PaymentForm,Search,StaffRegistration
+from Nacos.forms import StudentRegistration,Signin,PaymentForm,Search,StaffRegistration,Changepassword
 from Nacos.models import Student,Staff,Payment,User
 from flask_login import login_user,current_user,logout_user,login_required
+from passlib.hash import crypt16 as cr
+
+import os
+import tempfile
+import pdfkit
+from threading import Timer
 
 
 
-
+@login_required
 @app.route('/addstudent',methods=['GET','POST'])
 def addstudent():
+    if not current_user.role == 'admin':
+        flash('Unauthorised access as an admin')
+        return redirect(url_for('signin'))
     form = StudentRegistration()
     if form.validate_on_submit():
         user = User(reg_no=form.reg_no.data,
                     email=form.email.data,
-                    password = form.reg_no.data,
+                    password = cr.hash(form.reg_no.data),
                     name=form.fullname.data,
                     role = 'student',
                      )
@@ -27,15 +36,19 @@ def addstudent():
         db.session.add(student)
         db.session.commit()
         flash("Registration Successful",category="successful")
-        return redirect(url_for('signin'))
+        return redirect(url_for('admindashboard'))
 
 
 
     return render_template("staff login.html",form=form)
 
 
+@login_required
 @app.route('/addstaff',methods=['GET','POST'])
 def addstaff():
+    if not current_user.role == 'admin':
+        flash('Unauthorised access as an admin')
+        return redirect(url_for('signin'))
     form = StaffRegistration()
     if form.validate_on_submit():
         if form.combo.data is 1:
@@ -44,7 +57,7 @@ def addstaff():
             msg = 'staff'
         user = User(
                     email=form.email.data,
-                    password = form.password.data,
+                    password = cr.hash(form.password.data),
                     name=form.fullname.data,
                     role = msg,
                      )
@@ -54,42 +67,54 @@ def addstaff():
         staff = Staff(name=form.fullname.data,
                           email= form.email.data,
                           user_id= stu.id,
-                          role = form.msg.data,
-                          password= form.reg_no.data)
+                          role = msg,
+                          password= cr.hash(form.password.data))
         db.session.add(staff)
         db.session.commit()
         flash("Registration Successful",category="successful")
-        return redirect(url_for('signin'))
+        return redirect(url_for('admindashboard'))
 
 
 
     return render_template("add staff.html",form=form)
 
 
+@login_required
 @app.route('/', methods=['GET','POST'])
 def signin():
+    if current_user.is_authenticated:
+        if current_user.role == 'staff':
+            return redirect(url_for("staffdashboard"))
+        elif current_user.role == 'student':
+            return redirect(url_for("studentDashboard"))
+        elif current_user.role == 'admin':
+            return redirect(url_for('admindashboard'))
     form = Signin()
     if form.validate_on_submit():
             user = User.query.filter((User.reg_no == form.username.data)| (User.email == form.username.data)).first()
 
-            if user and user.role == 'student' and user.password == form.password.data:
+            if user and user.role == 'student' and cr.verify(form.password.data,user.password):
 
                 login_user(user)
                 print(current_user.name+" is currently logged in as a " + user.role)
                 details = Payment.query.filter_by(reg_no=current_user.reg_no).all()
                 print(current_user.name)
+                flash("Login Successful", 'success')
                 return redirect(url_for("studentDashboard"))
                 # return render_template('new template/Student dashboard.html',detail=details)
-            elif user and user.role == "staff" and user.password == form.password.data:
+            elif user and user.role == "staff" and cr.verify(form.password.data,user.password):
                 login_user(user)
+                flash("Login Successful", 'success')
                 print(current_user.name+" is currently logged in as a " + user.role)
                 return redirect(url_for('staffdashboard'))
 
-            elif user and user.role == "admin" and user.password == form.password.data:
+            elif user and user.role == "admin" and cr.verify(form.password.data,user.password):
                 login_user(user)
                 print(current_user.name+" is currently logged in as a " + user.role)
-                return redirect(url_for("admindashboard"))
                 flash("Welcome Admin", 'success')
+
+                return redirect(url_for("admindashboard"))
+
 
             else:
                     flash("Invalid Login Details", 'danger')
@@ -143,14 +168,22 @@ def signin():
 #
 #     return render_template('Student login.html',form=form)
 
+@login_required
 @app.route('/studentdashboard')
 def studentDashboard():
+    if not current_user.role == 'student':
+        flash('Unauthorised access as a student')
+        return redirect(url_for('signin'))
     user = current_user
     stu = Payment.query.filter_by(reg_no = user.reg_no)
     return render_template('new template/Student dashboard.html', user=user,stu=stu)
 
+@login_required
 @app.route('/staffdashboard/', methods=['GET','POST'])
 def staffdashboard():
+    if not current_user.role == 'staff':
+        flash('Unauthorised access as a staff')
+        return redirect(url_for('signin'))
     user = current_user
     form = Search()
     if form.validate_on_submit():
@@ -164,7 +197,7 @@ def staffdashboard():
 
     return render_template('new template/Staff dashboard 1.html',form=form, user=user)
 
-
+@login_required
 @app.route('/studenttable/<reg_no>')
 def studentPaymenttable(reg_no=' '):
     r = list(reg_no)
@@ -177,9 +210,12 @@ def studentPaymenttable(reg_no=' '):
 
 
     return render_template('new template/Staff dashboard.html',detail=detail,st=studentdetail)
-
+@login_required
 @app.route('/admindashboard',methods=['GET','POST'])
 def admindashboard():
+    if not current_user.role == 'admin':
+        flash('Unauthorised access as an admin')
+        return redirect(url_for('signin'))
     students = Student.query.all()
     payment = Payment.query.all()
     staff = Staff.query.all()
@@ -205,8 +241,12 @@ def logout():
     logout_user()
     return redirect(url_for("signin"))
 
+@login_required
 @app.route('/paymentform',methods=['GET','POST'])
 def paymentform():
+    if not current_user.role == 'admin':
+        flash('Unauthorised access as an admin')
+        return redirect(url_for('signin'))
     form = PaymentForm()
     if form.validate_on_submit():
         user = Student.query.filter_by(reg_no=form.reg_no.data).first()
@@ -220,14 +260,22 @@ def paymentform():
            db.session.add(payment)
            db.session.commit()
            flash('Payment Recorded')
+           return redirect(url_for('paymentform'))
+        if(not user):
+            flash('Student Does not exist')
+            return redirect(url_for('paymentform'))
+
 
 
 
     return render_template('new template/admin form.html',form=form)
 
-
+@login_required
 @app.route('/more/<tablename>' )
 def viewmore(tablename):
+    if not current_user.role == 'admin':
+        flash('Unauthorised access as an admin')
+        return redirect(url_for('signin'))
     if tablename == 'Student':
         table = Student.query.all()
     elif tablename == 'Payment':
@@ -235,3 +283,24 @@ def viewmore(tablename):
     elif tablename == 'Staff':
         table = Staff.query.all()
     return render_template('new template/staff_studenttable.html',tablename=tablename,table=table)
+
+@app.route('/print/<paymentid>')
+def printdoc(paymentid):
+    recipt = Payment.query.filter_by(id=paymentid).first()
+    user = User.query.filter_by(id=recipt.student_id).first()
+    return render_template('new template/payment receipt.html', recipt=recipt, user=user)
+
+@app.route('/changepassword/', methods=['GET','POST'])
+def changepassword():
+    form= Changepassword()
+    if form.validate_on_submit():
+        current_user.password = form.new_password.data
+        print(current_user.password)
+        db.session.commit()
+        if current_user.role == 'staff':
+            user = Staff.query.filter_by(userid=current_user.id)
+            user.password = form.new_password.data
+            db.session.commit()
+        flash("Changed sucessfully", 'danger')
+        return redirect(url_for('changepassword'))
+    return render_template("new template/change password.html",form=form)
