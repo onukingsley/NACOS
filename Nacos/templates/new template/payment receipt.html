@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Example 1</title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='new stylesheet/css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Authcss/bootstrap.css') }}">
+
+  </head>
+  <body>
+    <header class="clearfix">
+      <div id="logo">
+        <img src="{{ url_for('static', filename='images/new images/logo.jpeg') }}">
+      </div>
+      <h1>NACOS DUES/DEPT.LEVIES</h1>
+      <div id="company" class="clearfix">
+        <div>NIGERIA ASSOCIATION OF COMPUTING STUDENT</div>
+        <div>DEPARTMENT OF COMPUTER SCIENCE</div>
+        <div>UNIVERSITY OF NIIGERIA,NSUKKA</div>
+  
+      </div>
+      <div id="project">
+        <div>REGISTRATION NUMBER: {{recipt.studentid.reg_no}}</div>
+        <div>NAME: {{ recipt.studentid.name }}</div>
+        <div>EMAIL: {{user.email}}</div>
+        <div>DATE:  {{ recipt.Date }}</div>
+      </div>
+    </header>
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th class="service">SERVICE</th>
+            <th class="desc">DESCRIPTION</th>
+            <th>PRICE</th>
+            <th>QTY</th>
+            <th>TOTAL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="service">{{recipt.level}}</td>
+            <td class="service">FEE</td>
+            <td class="desc">Departmental fee payment</td>
+            <td class="unit"> ₦1700</td>
+          </tr>
+
+        </tbody>
+      </table>
+     
+    </main>
+   
+  </body>
+</html>
