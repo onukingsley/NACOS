@@ -16,8 +16,9 @@
     </div>
     
     <ul>
-        
-        <li style="padding: 20px; color:white;" class="active">Student payment history</li>
+        <a href="{{ url_for('viewmore',tablename='Student') }}"> <li style="padding: 20px; color:white;" class="active">Student payment history</li></a>
+        <a href="{{ url_for('changepassword') }}"><li style="padding: 20px;">Change Password</li></a>
+
         <a href={{ url_for('logout') }}><li style="padding: 20px;">Logout</li></a>
 
         

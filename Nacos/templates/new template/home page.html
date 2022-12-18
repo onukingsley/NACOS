@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="{{ url_for('static', filename='new stylesheet/css/home page.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Authcss/bootstrap.css') }}">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <title>Landing page</title>
+</head>
+<body>
+    <div class="banner">
+        <div class="content">
+            <h3>NACOS</h3>
+            <p>Nigeria Association of Computing Students</p>
+            <h2 style="color: #0745c0;">This is a system that verifies the payment of NACOS Fee</h2>
+            <p>login as a Student/Staff</p>
+            <div>
+                <button type="button"><span></span><a href="{{ url_for('signin') }}">STUDENT</a></button>
+                <button type="button"><span></span><a href="{{ url_for('loginadmin') }}">STAFF</a></button>
+            </div>
+    
+        </div>
+        
+    </div>
+    
+    
+</body>
+</html>
